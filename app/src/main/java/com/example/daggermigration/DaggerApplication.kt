@@ -1,21 +1,17 @@
 package com.example.daggermigration
 
 import android.app.Application
-import com.example.daggermigration.di.ApplicationModule
-import dagger.ObjectGraph
+import com.example.daggermigration.di.ApplicationComponent
+import com.example.daggermigration.di.DaggerApplicationComponent
 
-const val OBJECT_GRAPH_NAME = "dagger-object-graph"
 
 class DaggerApplication : Application() {
 
-    lateinit var objectGraph: ObjectGraph
-
+    lateinit var applicationComponent: ApplicationComponent
     override fun onCreate() {
         super.onCreate()
-        objectGraph = ObjectGraph.create(ApplicationModule())
+
+        applicationComponent = DaggerApplicationComponent.builder().build()
     }
 
-    override fun getSystemService(name: String): Any? {
-        return if (name == OBJECT_GRAPH_NAME) objectGraph else super.getSystemService(name)
-    }
 }

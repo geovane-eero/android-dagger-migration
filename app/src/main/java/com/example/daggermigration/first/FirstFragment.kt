@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.daggermigration.R
+import com.example.daggermigration.applicationComponent
 import com.example.daggermigration.databinding.FragmentFirstBinding
-import com.example.daggermigration.injectViewModel
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -16,7 +17,9 @@ import com.example.daggermigration.injectViewModel
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
-    private val viewModel: FirstViewModel by injectViewModel()
+
+    @Inject
+    lateinit var viewModel: FirstViewModel
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,16 +29,15 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        applicationComponent?.inject(this)
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.log()
         binding.buttonFirst.setOnClickListener {
+            viewModel.log()
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
