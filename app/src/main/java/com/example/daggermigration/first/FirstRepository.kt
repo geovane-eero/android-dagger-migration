@@ -6,5 +6,7 @@ import javax.inject.Inject
 class FirstRepository @Inject constructor(
 ) {
 
-    fun log() = Log.d("FirstRepository", "Repository created!")
+    fun log() {
+        Log.d("FirstRepository", "Repository created!")
+    }
 }

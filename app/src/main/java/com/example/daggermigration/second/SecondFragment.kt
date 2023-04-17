@@ -9,7 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.daggermigration.di.AuxModule
 import com.example.daggermigration.R
 import com.example.daggermigration.databinding.FragmentSecondBinding
-import com.example.daggermigration.injectViewModel
+import com.example.daggermigration.di.DaggerSecondComponent
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -17,10 +18,10 @@ import com.example.daggermigration.injectViewModel
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-    private val viewModel: SecondViewModel by injectViewModel(::buildModule)
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    @Inject
+    lateinit var viewModel: SecondViewModel
+
     private val binding get() = _binding!!
 
     private fun buildModule() = AuxModule("SecondFragment")
@@ -29,7 +30,10 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        DaggerSecondComponent.builder()
+            .auxModule(buildModule())
+            .build()
+            .inject(this)
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
 

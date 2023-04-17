@@ -5,15 +5,7 @@ import com.example.daggermigration.second.SecondViewModel
 import dagger.Module
 import dagger.Provides
 
-@Module(
-    injects = [
-        SecondRepository::class,
-        SecondViewModel::class
-    ],
-    addsTo = ApplicationModule::class,
-    library = true,
-    complete = false
-)
+@Module
 class AuxModule(private val parameter: String) {
 
     @Provides

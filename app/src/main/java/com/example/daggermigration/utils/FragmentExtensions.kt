@@ -6,7 +6,9 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import dagger.ObjectGraph
+import com.example.daggermigration.di.ApplicationComponent
+
+//import dagger.ObjectGraph
 
 /*
 * This extension function is used to avoid repeating ViewModelProvider.Factory
@@ -43,31 +45,31 @@ inline fun <reified VM : ViewModel> Fragment.getSharedViewModel(
  * Gets a ViewModel from Dagger's Graph, optionally pass a "buildModule" function to get the
  * ViewModel from a custom module
  */
-inline fun <reified VM : ViewModel> Fragment.getViewModelFromGraph(
-    noinline buildModule: (() -> Any)?
-): VM {
-    val graph = buildModule?.let { applicationGraph?.plus(it()) } ?: applicationGraph
-    return graph?.get(VM::class.java)!!
-}
+//inline fun <reified VM : ViewModel> Fragment.getViewModelFromGraph(
+//    noinline buildModule: (() -> Any)?
+//): VM {
+//    val graph = buildModule?.let { applicationComponent?.plus(it()) } ?: applicationGraph
+//    return graph?.get(VM::class.java)!!
+//}
 
 /*
  * Injects a ViewModel via delegated property
  */
-inline fun <reified VM : ViewModel> Fragment.injectViewModel(
-    noinline buildModule: (() -> Any)? = null
-) = lazy {
-    getViewModel { getViewModelFromGraph<VM>(buildModule) }
-}
+//inline fun <reified VM : ViewModel> Fragment.injectViewModel(
+//    noinline buildModule: (() -> Any)? = null
+//) = lazy {
+//    getViewModel { getViewModelFromGraph<VM>(buildModule) }
+//}
 
 /*
  * Injects a shared ViewModel via delegated property. The injected ViewModel is bound to Activity's
  * lifecycle
  */
-inline fun <reified VM : ViewModel> Fragment.injectSharedViewModel(
-    noinline buildModule: (() -> Any)? = null
-) = lazy {
-    getSharedViewModel { getViewModelFromGraph<VM>(buildModule) }
-}
+//inline fun <reified VM : ViewModel> Fragment.injectSharedViewModel(
+//    noinline buildModule: (() -> Any)? = null
+//) = lazy {
+//    getSharedViewModel { getViewModelFromGraph<VM>(buildModule) }
+//}
 
 /*
  * Injects a shared ViewModel identified with a specific key via delegated property. The injected
@@ -77,15 +79,15 @@ inline fun <reified VM : ViewModel> Fragment.injectSharedViewModel(
  * for the same view model to avoid sharing instances that shouldn't be shared), or
  * 2. both can call this method passing the exactly same key.
  */
-inline fun <reified VM : ViewModel> Fragment.injectSharedViewModel(
-    key: String,
-    noinline buildModule: (() -> Any)? = null
-) = lazy {
-    getSharedViewModel(key) { getViewModelFromGraph<VM>(buildModule) }
-}
+//inline fun <reified VM : ViewModel> Fragment.injectSharedViewModel(
+//    key: String,
+//    noinline buildModule: (() -> Any)? = null
+//) = lazy {
+//    getSharedViewModel(key) { getViewModelFromGraph<VM>(buildModule) }
+//}
 
-val Fragment.applicationGraph: ObjectGraph?
-    get() = (context?.applicationContext as? DaggerApplication)?.objectGraph
+val Fragment.applicationComponent: ApplicationComponent?
+    get() = (context?.applicationContext as? DaggerApplication)?.applicationComponent
 
 val Fragment.viewModelStoreManager: ViewModelStoreManager
     get() = (activity as ViewModelStoreManagerHolder).viewModelStoreManager
