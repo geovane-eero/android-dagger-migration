@@ -7,5 +7,7 @@ class FirstViewModel @Inject constructor(
     val repository: FirstRepository
 ) : ViewModel() {
 
-    fun log() = repository.log()
+    fun log() {
+        repository.log()
+    }
 }
