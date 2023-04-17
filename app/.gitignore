@@ -1,0 +1,16 @@
+.gradle
+ajcore.*.txt
+/local.properties
+/.apt_generated
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/rpc/gen
+/captures
+.settings
+.idea
+**/*.iml
+**/.idea
+**/build
+**/reports
