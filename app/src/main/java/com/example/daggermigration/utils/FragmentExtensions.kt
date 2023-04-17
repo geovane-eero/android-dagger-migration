@@ -6,7 +6,6 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.daggermigration.di.ApplicationComponent
 
 //import dagger.ObjectGraph
 
@@ -86,8 +85,8 @@ inline fun <reified VM : ViewModel> Fragment.getSharedViewModel(
 //    getSharedViewModel(key) { getViewModelFromGraph<VM>(buildModule) }
 //}
 
-val Fragment.applicationComponent: ApplicationComponent?
-    get() = (context?.applicationContext as? DaggerApplication)?.applicationComponent
+//val Fragment.applicationComponent: ApplicationComponent?
+//    get() = (context?.applicationContext as? DaggerApplication)?.applicationComponent
 
 val Fragment.viewModelStoreManager: ViewModelStoreManager
     get() = (activity as ViewModelStoreManagerHolder).viewModelStoreManager
