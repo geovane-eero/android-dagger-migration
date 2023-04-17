@@ -1,4 +1,4 @@
-package com.example.daggermigration
+package com.example.daggermigration.first
 
 import android.util.Log
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.example.daggermigration
+package com.example.daggermigration.first
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,37 +6,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.daggermigration.databinding.FragmentSecondBinding
+import com.example.daggermigration.R
+import com.example.daggermigration.databinding.FragmentFirstBinding
+import com.example.daggermigration.injectViewModel
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class FirstFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
-    private val viewModel: SecondViewModel by injectViewModel(::buildModule)
+    private var _binding: FragmentFirstBinding? = null
+    private val viewModel: FirstViewModel by injectViewModel()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    private fun buildModule() = AuxModule("SecondFragment")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonSecond.setOnClickListener {
-            viewModel.log()
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        viewModel.log()
+        binding.buttonFirst.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
 

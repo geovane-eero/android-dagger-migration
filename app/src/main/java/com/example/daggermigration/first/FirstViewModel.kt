@@ -1,4 +1,4 @@
-package com.example.daggermigration
+package com.example.daggermigration.first
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject

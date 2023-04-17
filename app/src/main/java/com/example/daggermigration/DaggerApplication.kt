@@ -1,6 +1,7 @@
 package com.example.daggermigration
 
 import android.app.Application
+import com.example.daggermigration.di.ApplicationModule
 import dagger.ObjectGraph
 
 const val OBJECT_GRAPH_NAME = "dagger-object-graph"

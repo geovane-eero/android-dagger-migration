@@ -1,5 +1,7 @@
-package com.example.daggermigration
+package com.example.daggermigration.di
 
+import com.example.daggermigration.second.SecondRepository
+import com.example.daggermigration.second.SecondViewModel
 import dagger.Module
 import dagger.Provides
 
