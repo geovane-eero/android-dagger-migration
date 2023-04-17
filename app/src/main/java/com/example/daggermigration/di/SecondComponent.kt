@@ -4,7 +4,7 @@ import com.example.daggermigration.second.SecondFragment
 import dagger.Component
 
 @Component(
-    modules = [AuxModule::class]
+    modules = [SecondModule::class]
 )
 interface SecondComponent {
 
