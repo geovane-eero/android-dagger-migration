@@ -1,11 +1,9 @@
 package com.example.daggermigration.second
 
 import android.util.Log
-import javax.inject.Inject
+import javax.inject.InjectDagger1
 
-class SecondRepository @Inject constructor(
-    private val parameter: String
-) {
+class SecondRepository @InjectDagger1 constructor() {
 
-    fun log() = Log.d("Dagger", "Second repository created $parameter")
+    fun log() = Log.d("Dagger", "Second repository created ")
 }
