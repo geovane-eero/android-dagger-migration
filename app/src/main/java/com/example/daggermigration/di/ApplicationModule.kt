@@ -2,12 +2,14 @@ package com.example.daggermigration.di
 
 import com.example.daggermigration.first.FirstRepository
 import com.example.daggermigration.first.FirstViewModel
-import dagger.Module
+import com.example.daggermigration.second.SecondRepository
+import dagger.ModuleDagger1
 
-@Module(
+@ModuleDagger1(
     injects = [
         FirstViewModel::class,
-        FirstRepository::class
+        FirstRepository::class,
+        SecondRepository::class
     ],
     library = true
 )

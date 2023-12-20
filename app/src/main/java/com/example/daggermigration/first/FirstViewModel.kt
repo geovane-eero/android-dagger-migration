@@ -1,9 +1,9 @@
 package com.example.daggermigration.first
 
 import androidx.lifecycle.ViewModel
-import javax.inject.Inject
+import javax.inject.InjectDagger1
 
-class FirstViewModel @Inject constructor(
+class FirstViewModel @InjectDagger1 constructor(
     val repository: FirstRepository
 ) : ViewModel() {
 
