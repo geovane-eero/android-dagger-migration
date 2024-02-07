@@ -6,30 +6,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.daggermigration.di.AuxModule
 import com.example.daggermigration.R
 import com.example.daggermigration.databinding.FragmentSecondBinding
-import com.example.daggermigration.injectViewModel
+import com.example.daggermigration.di.SecondViewModelAssistedFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
+@AndroidEntryPoint
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-    private val viewModel: SecondViewModel by injectViewModel(::buildModule)
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    @Inject
+    lateinit var assistedFactory: SecondViewModelAssistedFactory
+
+    // This is directly
+    private val viewModel: SecondViewModel by lazy { assistedFactory.create("SecondFragment") }
+
+    // Here we can take advantage of the by viewModels, but we need a ViewModelProvider.Factory
+//    private val viewModel: SecondViewModel by viewModels {
+//        SecondViewModel.Factory(assistedFactory, "SecondFragment")
+//    }
+
     private val binding get() = _binding!!
-
-    private fun buildModule() = AuxModule("SecondFragment")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
 
